@@ -1,8 +1,9 @@
 {
-  "lastUpdated": "2026-03-04",
+  "lastUpdated": "2026-10-15",
   "description": "Open bounties for visa data contributions. All submissions MUST include official government source URLs.",
   "totalOpenBounties": 8,
-  "totalValue": "£215",
+  "rewardNote": "Rewards follow the schedule revised on 2026-10-13 (see CONTRIBUTING.md). PRs opened before 2026-10-13 are honored at the rates published when they were opened. AI-assisted contributions follow the AI Contributions & Review Policy. critical_change and new_origin_country need maintainer pre-assignment through an issue.",
+  "totalValue": "varies (document privileges pay per valid entry)",
   "sourceRequirements": {
     "mandatory": true,
     "acceptedDomains": [".gov", ".gov.uk", ".gov.au", ".gc.ca", ".gouv.fr", ".gob.mx"],
@@ -39,7 +40,7 @@
       "id": "bounty-2026-0304-001",
       "type": "document_privilege",
       "status": "open",
-      "reward": "£20",
+      "reward": "£3 per valid entry (+20% on 5+ in one PR)",
       "target": {
         "file": "data/document-privileges/SCHENGEN-visa.json",
         "description": "Add Schengen visa document privileges - countries that allow entry with valid Schengen visa"
@@ -65,7 +66,7 @@
       "id": "bounty-2026-0304-002",
       "type": "document_privilege",
       "status": "open",
-      "reward": "£20",
+      "reward": "£3 per valid entry (+20% on 5+ in one PR)",
       "target": {
         "file": "data/document-privileges/US-green-card.json",
         "description": "Add US Green Card (permanent resident) privileges"
@@ -86,7 +87,7 @@
       "id": "bounty-2026-0304-003",
       "type": "verified_update",
       "status": "open",
-      "reward": "£15",
+      "reward": "£2",
       "target": {
         "file": "data/passport-requirements/*.json",
         "route": "* → IN",
@@ -112,7 +113,7 @@
       "id": "bounty-2026-0304-004",
       "type": "critical_change",
       "status": "open",
-      "reward": "£30",
+      "reward": "£5",
       "target": {
         "file": "data/passport-requirements/*.json",
         "route": "* → RW",
@@ -138,7 +139,7 @@
       "id": "bounty-2026-0304-005",
       "type": "verification",
       "status": "open",
-      "reward": "£5",
+      "reward": "£1",
       "target": {
         "file": "data/passport-requirements/GH.json",
         "route": "GH → GB",
@@ -163,7 +164,7 @@
       "id": "bounty-2026-0304-006",
       "type": "verified_update",
       "status": "open",
-      "reward": "£15",
+      "reward": "£2",
       "target": {
         "file": "data/passport-requirements/*.json",
         "route": "* → AE",
@@ -187,7 +188,7 @@
       "id": "bounty-2026-0304-007",
       "type": "document_privilege",
       "status": "open",
-      "reward": "£20",
+      "reward": "£3 per valid entry (+20% on 5+ in one PR)",
       "target": {
         "file": "data/document-privileges/CANADA-pr.json",
         "description": "Add Canadian Permanent Resident card privileges"
@@ -207,7 +208,7 @@
       "id": "bounty-2026-0304-008",
       "type": "critical_change",
       "status": "open",
-      "reward": "£30",
+      "reward": "£5",
       "target": {
         "file": "data/passport-requirements/*.json",
         "route": "* → KE",
