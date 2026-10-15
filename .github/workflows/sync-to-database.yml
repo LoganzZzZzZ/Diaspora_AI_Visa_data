@@ -11,6 +11,10 @@ on:
 jobs:
   sync-to-supabase:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+      pull-requests: write
     
     steps:
       - name: Checkout repository
@@ -147,9 +151,13 @@ jobs:
                   }
                   
                   console.log('✅ Synced ' + successCount + ' routes, ❌ ' + errorCount + ' errors for ' + fromCountry);
+                  if (errorCount > 0) {
+                    console.error('Sync failed for ' + errorCount + ' route(s)');
+                    process.exit(1);
+                  }
                 }
                 
-                syncToSupabase().catch(console.error);
+                syncToSupabase().catch(e => { console.error(e); process.exit(1); });
               "
             fi
           done
@@ -158,6 +166,7 @@ jobs:
 
       - name: Post sync summary
         if: steps.changed.outputs.files != ''
+        continue-on-error: true
         uses: actions/github-script@v7
         with:
           script: |
