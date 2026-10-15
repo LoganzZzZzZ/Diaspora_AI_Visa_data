@@ -41,18 +41,22 @@ jobs:
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          CHANGED_FILES: ${{ steps.changed.outputs.files }}
         run: |
           echo "Syncing verified data directly to Supabase..."
           
-          for file in ${{ steps.changed.outputs.files }}; do
+          FAILED=0
+          
+          # One changed file per line (a merge can change several files)
+          while IFS= read -r file; do
             if [[ "$file" == data/passport-requirements/*.json ]]; then
               COUNTRY_CODE=$(basename "$file" .json)
               echo "Syncing passport requirements for: $COUNTRY_CODE"
               
               # Read the JSON and sync via Node.js script
-              node -e "
+              if ! SYNC_FILE="$file" SYNC_COUNTRY="$COUNTRY_CODE" node -e "
                 const fs = require('fs');
-                const data = JSON.parse(fs.readFileSync('$file', 'utf8'));
+                const data = JSON.parse(fs.readFileSync(process.env.SYNC_FILE, 'utf8'));
                 
                 async function syncToSupabase() {
                   const supabaseUrl = process.env.SUPABASE_URL;
@@ -63,7 +67,7 @@ jobs:
                     process.exit(1);
                   }
                   
-                  const fromCountry = data.passport?.code || '$COUNTRY_CODE';
+                  const fromCountry = data.passport?.code || process.env.SYNC_COUNTRY;
                   let successCount = 0;
                   let errorCount = 0;
                   
@@ -160,9 +164,16 @@ jobs:
                 }
                 
                 syncToSupabase().catch(e => { console.error(e); process.exit(1); });
-              "
+              "; then
+                FAILED=1
+              fi
             fi
-          done
+          done <<< "$CHANGED_FILES"
+          
+          if [ "$FAILED" -ne 0 ]; then
+            echo "::error::Sync failed for at least one file"
+            exit 1
+          fi
           
           echo "Sync complete!"
 
