@@ -107,7 +107,7 @@ jobs:
                     
                     try {
                       const response = await fetch(
-                        supabaseUrl + '/rest/v1/visa_requirements?from_country=eq.' + fromCountry + '&to_country=eq.' + route.to?.code,
+                        supabaseUrl + '/rest/v1/VisaRequirements?from_country=eq.' + fromCountry + '&to_country=eq.' + route.to?.code,
                         {
                           method: 'GET',
                           headers: {
@@ -120,8 +120,8 @@ jobs:
                       const existing = await response.json();
                       const method = existing.length > 0 ? 'PATCH' : 'POST';
                       const url = existing.length > 0 
-                        ? supabaseUrl + '/rest/v1/visa_requirements?from_country=eq.' + fromCountry + '&to_country=eq.' + route.to?.code
-                        : supabaseUrl + '/rest/v1/visa_requirements';
+                        ? supabaseUrl + '/rest/v1/VisaRequirements?from_country=eq.' + fromCountry + '&to_country=eq.' + route.to?.code
+                        : supabaseUrl + '/rest/v1/VisaRequirements';
                       
                       const upsertResponse = await fetch(url, {
                         method: method,
