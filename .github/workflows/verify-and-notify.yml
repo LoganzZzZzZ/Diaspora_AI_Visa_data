@@ -30,18 +30,21 @@ jobs:
 
       - name: Get changed files
         id: changed
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.sha }}
         run: |
-          git diff --name-only ${{ github.event.pull_request.base.sha }} ${{ github.sha }} > changed_files.txt
+          git diff --name-only "$BASE_SHA" "$HEAD_SHA" > changed_files.txt
           cat changed_files.txt
 
       - name: Verify Government Sources
         id: verify
         env:
-          GH_CONTRIBUTOR: ${{ github.event.pull_request.user.login }}
-          GH_PR_NUMBER: ${{ github.event.pull_request.number }}
-          GH_PR_TITLE: ${{ github.event.pull_request.title }}
-          GH_PR_URL: ${{ github.event.pull_request.html_url }}
-          GH_FORK_REPO: ${{ github.event.pull_request.head.repo.full_name }}
+          CONTRIBUTOR: ${{ github.event.pull_request.user.login }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          PR_TITLE: ${{ github.event.pull_request.title }}
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          FORK_REPO: ${{ github.event.pull_request.head.repo.full_name }}
         run: |
           echo "🔍 Verifying government source URLs..."
           
@@ -135,11 +138,6 @@ jobs:
           echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
           
           # Get contributor info
-          CONTRIBUTOR="$GH_CONTRIBUTOR"
-          PR_NUMBER="$GH_PR_NUMBER"
-          PR_TITLE="$GH_PR_TITLE"
-          PR_URL="$GH_PR_URL"
-          FORK_REPO="$GH_FORK_REPO"
           
           # Determine if verification passed
           if [ "$VERIFIED_COUNT" -gt 0 ] && [ "$FAILED_COUNT" -eq 0 ]; then
@@ -150,32 +148,32 @@ jobs:
             echo "❌ Verification failed - some sources could not be verified"
           fi
           
-          # Save contributor info for email
-          CONTRIBUTOR_INFO=$(cat << EOF
-          {
-            "contributor": "$CONTRIBUTOR",
-            "pr_number": $PR_NUMBER,
-            "pr_title": "$PR_TITLE",
-            "pr_url": "$PR_URL",
-            "fork_repo": "$FORK_REPO",
-            "verified_count": $VERIFIED_COUNT,
-            "failed_count": $FAILED_COUNT,
-            "timestamp": "$(date -u +"%Y-%m-%dT%H:%M:%SZ")"
-          }
-          EOF
-          )
+          # Save contributor info for the comment and email (built with jq so
+          # untrusted values such as the PR title are escaped correctly)
+          CONTRIBUTOR_INFO=$(jq -nc \
+            --arg contributor "$CONTRIBUTOR" \
+            --argjson pr_number "$PR_NUMBER" \
+            --arg pr_title "$PR_TITLE" \
+            --arg pr_url "$PR_URL" \
+            --arg fork_repo "$FORK_REPO" \
+            --argjson verified_count "$VERIFIED_COUNT" \
+            --argjson failed_count "$FAILED_COUNT" \
+            --arg timestamp "$(date -u +"%Y-%m-%dT%H:%M:%SZ")" \
+            '{contributor: $contributor, pr_number: $pr_number, pr_title: $pr_title, pr_url: $pr_url, fork_repo: $fork_repo, verified_count: $verified_count, failed_count: $failed_count, timestamp: $timestamp}')
           
-          # Escape for GitHub output
-          echo "contributor_info<<EOF" >> $GITHUB_OUTPUT
-          echo "$CONTRIBUTOR_INFO" >> $GITHUB_OUTPUT
-          echo "EOF" >> $GITHUB_OUTPUT
+          echo "contributor_info=$CONTRIBUTOR_INFO" >> $GITHUB_OUTPUT
 
+      # Pull requests from forks get a read-only token, so commenting is best-effort.
       - name: Post verification comment
+        continue-on-error: true
         uses: actions/github-script@v7
+        env:
+          PASSED: ${{ steps.verify.outputs.passed }}
+          INFO: ${{ steps.verify.outputs.contributor_info }}
         with:
           script: |
-            const passed = '${{ steps.verify.outputs.passed }}' === 'true';
-            const info = JSON.parse(`${{ steps.verify.outputs.contributor_info }}`);
+            const passed = process.env.PASSED === 'true';
+            const info = JSON.parse(process.env.INFO);
             
             let body;
             if (passed) {
@@ -197,7 +195,7 @@ jobs:
             
             Your contribution has been **verified**! To receive your bounty payment:
             
-            1. **Send an email to:** \`info@diasporaai.dev\`
+            1. **Send an email to:** \`contributors@diasporaai.dev\`
             2. **Subject:** \`Bounty Payment - PR #${info.pr_number}\`
             3. **Include in email:**
                - Your GitHub username: \`${info.contributor}\`
@@ -206,7 +204,7 @@ jobs:
                - Payment method preference (PayPal, Wise, or bank transfer)
                - Payment details (email for PayPal/Wise, or bank details)
             
-            ⏱️ **Timeline:** Payments are processed within 3-5 business days after verification.
+            ⏱️ **Timeline:** Payments are batched monthly and sent on the 11th, for PRs merged and claimed by the end of the previous month.
             
             ---
             *Automated verification by Diaspora Visa Data CI*
@@ -253,8 +251,9 @@ jobs:
     
     steps:
       - name: Send verification email to admin
+        env:
+          INFO: ${{ needs.verify-government-sources.outputs.contributor_info }}
         run: |
-          INFO='${{ needs.verify-government-sources.outputs.contributor_info }}'
           
           CONTRIBUTOR=$(echo "$INFO" | jq -r '.contributor')
           PR_NUMBER=$(echo "$INFO" | jq -r '.pr_number')
@@ -278,6 +277,7 @@ jobs:
           echo "📧 Admin notification email sent!"
 
       - name: Add verified label
+        continue-on-error: true
         uses: actions/github-script@v7
         with:
           script: |

@@ -19,16 +19,23 @@ jobs:
 
       - name: Get changed files
         id: files
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.sha }}
         run: |
-          FILES=$(git diff --name-only ${{ github.event.pull_request.base.sha }} ${{ github.sha }})
+          FILES=$(git diff --name-only "$BASE_SHA" "$HEAD_SHA")
           echo "files<<EOF" >> $GITHUB_OUTPUT
           echo "$FILES" >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
 
       - name: Determine labels
         id: labels
+        env:
+          FILES: ${{ steps.files.outputs.files }}
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.sha }}
+          PR_TITLE: ${{ github.event.pull_request.title }}
         run: |
-          FILES="${{ steps.files.outputs.files }}"
           LABELS=""
           
           # Check for new passport requirements
@@ -55,7 +62,7 @@ jobs:
           fi
           
           # Check for critical/urgent updates
-          COMMIT_MSG="${{ github.event.pull_request.title }}"
+          COMMIT_MSG="$PR_TITLE"
           if echo "$COMMIT_MSG" | grep -iq "urgent\|critical\|changed\|new policy"; then
             LABELS="${LABELS}urgent-review,"
           fi
@@ -71,8 +78,10 @@ jobs:
           echo "labels=$LABELS" >> $GITHUB_OUTPUT
           echo "Determined labels: $LABELS"
 
+      # Pull requests from forks get a read-only token, so labelling is best-effort.
       - name: Apply labels
         if: steps.labels.outputs.labels != ''
+        continue-on-error: true
         uses: actions/github-script@v7
         with:
           script: |
