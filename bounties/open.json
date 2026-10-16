@@ -86,7 +86,7 @@
     {
       "id": "bounty-2026-0304-003",
       "type": "verified_update",
-      "status": "open",
+      "status": "expired",
       "reward": "£2",
       "target": {
         "file": "data/passport-requirements/*.json",
@@ -112,7 +112,7 @@
     {
       "id": "bounty-2026-0304-004",
       "type": "critical_change",
-      "status": "open",
+      "status": "expired",
       "reward": "£5",
       "target": {
         "file": "data/passport-requirements/*.json",
