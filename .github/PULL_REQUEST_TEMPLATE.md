@@ -52,7 +52,7 @@ Paste the exact quote here
 - [ ] `source.url` points to government website
 - [ ] `source.governmentDomain` is set to `true`
 - [ ] `source.accessedDate` is set
-- [ ] `lastUpdated` field is set to today's date
+- [ ] The `lastUpdated` of the route/entry I changed is set to today's date (do **not** edit the file's top-level `lastUpdated`; the maintainer updates it on merge)
 - [ ] I have read the [Contributing Guidelines](CONTRIBUTING.md)
 
 ## Bounty Eligibility

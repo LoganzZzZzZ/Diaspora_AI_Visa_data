@@ -254,6 +254,8 @@ Edit the relevant JSON file following our [schema](SCHEMA.md).
 - Passport requirements: `data/passport-requirements/{COUNTRY_CODE}.json`
 - Document privileges: `data/document-privileges/{COUNTRY}-{type}.json`
 
+**Dates:** set `lastUpdated` only on the route or entry you changed. Leave the file's top-level `lastUpdated` alone: every PR to the same country file edits that line, so changing it makes PRs conflict with each other. The maintainer updates it when merging.
+
 ### Step 4: Add Source Information (⚠️ MANDATORY)
 
 **Every change MUST include the official government source URL.** PRs without valid government sources will be rejected.
