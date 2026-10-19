@@ -79,7 +79,7 @@ jobs:
                       popular_for: route.popularFor || [],
                       visa_info: {
                         visa_required: route.visa?.required,
-                        visa_policy: route.visa?.policy,
+                        visa_policy: ({ visa_on_arrival: 'voa' })[route.visa?.policy] || route.visa?.policy,
                         visa_type_hint: route.visa?.type || null,
                         visa_free_days: route.visa?.freeDays || null,
                         evisa_available: route.visa?.evisa || false,

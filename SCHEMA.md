@@ -71,7 +71,7 @@ This document defines the JSON schema for all data files in this repository.
         "required": { "type": "boolean" },
         "policy": {
           "type": "string",
-          "enum": ["visa_required", "visa_free", "evisa", "voa", "eta", "transit_visa", "unknown"]
+          "enum": ["visa_required", "visa_free", "evisa", "voa", "eta", "transit_visa", "no_admission", "unknown"]
         },
         "type": { "type": "string" },
         "maxStayDays": { "type": "integer" },
@@ -211,6 +211,25 @@ This document defines the JSON schema for all data files in this repository.
   ]
 }
 ```
+
+---
+
+### Visa policy values
+
+`visa.policy` must be one of these values:
+
+| Value | Meaning |
+|-------|---------|
+| `visa_free` | No visa needed |
+| `visa_required` | A visa is needed before travel |
+| `evisa` | Electronic visa, applied for before travel |
+| `voa` | Visa on arrival (always spelled `voa`; the sync converts the legacy spelling `visa_on_arrival` to `voa`) |
+| `eta` | Electronic travel authorisation |
+| `transit_visa` | Visa needed for transit only |
+| `no_admission` | Entry is not permitted for this passport |
+| `unknown` | Not known |
+
+A pull request check rejects any route it adds or changes with a policy value that is not in this table.
 
 ---
 

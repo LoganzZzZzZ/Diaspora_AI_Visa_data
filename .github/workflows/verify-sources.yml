@@ -51,6 +51,11 @@ jobs:
             exit 1
           fi
 
+      - name: Check visa policy values against the schema
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: node .github/scripts/check-visa-policy.js "$BASE_SHA" HEAD
+
       - name: Verify sources are from trusted domains
         id: verify-domains
         run: |
