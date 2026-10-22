@@ -2922,7 +2922,6 @@
         "maxStay": null,
         "evisa": false,
         "onArrival": false,
-        "multipleEntry": false,
         "notes": "Algerian nationals are listed as visa nationals by the UK Home Office and generally must obtain entry clearance before visiting the UK, subject to published exceptions. For tourism or short visits of up to 6 months, the Standard Visitor visa has a UK government published fee of GBP 135; this is not a price quote in the application country's local currency. Overseas Standard Visitor applications usually receive a decision within 3 weeks from the start of UKVI processing, but delays are possible. These statements do not cover work, study, transit, long-term visa categories, entry multiplicity, or the independent accuracy of pre-existing document rules.",
         "processingDays": "Usually 3 weeks after the UKVI processing clock begins; longer waits possible",
         "cost": {
