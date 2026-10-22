@@ -9493,10 +9493,36 @@
       "meta": {
         "riskLevel": "low",
         "confidence": "verified",
-        "lastChecked": "2026-01-19",
-        "source": "passport-index-dataset"
+        "lastChecked": "2026-10-22",
+        "source": "Ghana Ministry of Foreign Affairs"
       },
-      "lastUpdated": "2026-01-19T03:05:53.124"
+      "lastUpdated": "2026-10-22T00:00:00.000Z",
+      "source": {
+        "url": "https://passport.mfa.gov.gh/visa-free-countries",
+        "governmentDomain": true,
+        "accessedDate": "2026-10-22",
+        "verificationPath": "Ghana Passport Services (Ministry of Foreign Affairs) > Visa-Free Countries > Countries with visa-free or visa-waiver agreements with Ghana (Last updated: 8 September 2026 by MFA Ghana)",
+        "exactQuote": "90 days",
+        "notes": "Scope: visa requirement and stay only. Ghana MFA lists Saint Vincent and the Grenadines as visa-free for Ghanaian ordinary passports for up to 90 days. SVG's Ministry of Foreign Affairs does not list Ghana among nationalities requiring a visa, and the Government of SVG reports a Ghana-SVG visa waiver MoU signed 30 November 2018. SVG's general 1-month rule for 'the majority of foreign nationals' does not name Ghana, so the existing 90-day value is retained. Other fields are retained without re-verification.",
+        "confidence": "verified",
+        "additionalSources": [
+          {
+            "url": "https://www.gov.vc/index.php/media-center/917-saint-vincent-and-the-grenadines-and-the-republic-of-ghana-signs-two-bilateral-agreements",
+            "governmentDomain": true,
+            "accessedDate": "2026-10-22",
+            "verificationPath": "Government of SVG > Media Center > Saint Vincent And The Grenadines And The Republic Of Ghana Signs Two Bilateral Agreements",
+            "exactQuote": "the second, a Memorandum of Understanding between the Government of Ghana and the Government of Saint Vincent and the Grenadines on Visa Waiver."
+          },
+          {
+            "url": "https://foreign.gov.vc/foreign/index.php/visas",
+            "governmentDomain": true,
+            "accessedDate": "2026-10-22",
+            "verificationPath": "Ministry of Foreign Affairs > Visas > Countries for which visa requirements apply for entry into St. Vincent and the Grenadines",
+            "exactQuote": "They are: Iran Dominican Republic Nigeria Lebanon China Iraq Syria Haiti Afghanistan Cameroon",
+            "notes": "Ghana is not on the visa-required list."
+          }
+        ]
+      }
     },
     {
       "to": {
