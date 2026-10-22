@@ -2971,7 +2971,6 @@
         "maxStay": null,
         "evisa": false,
         "onArrival": false,
-        "multipleEntry": false,
         "notes": "Moroccan nationals are listed by the UK Home Office as visa nationals for visits to the UK and generally must secure entry clearance before travelling, subject to published exceptions. A Standard Visitor visa for a visit of up to 6 months has a UK government published application fee of GBP 135. Standard processing for overseas applications is usually 3 weeks after the UKVI processing clock starts, not a guarantee. Fee and timing refer only to the Standard Visitor category; no assertion is made for transit, employment, study, long-term visas, or visa entry multiplicity.",
         "processingDays": "Usually 3 weeks after identity verification and application submission; longer waits possible",
         "cost": {
