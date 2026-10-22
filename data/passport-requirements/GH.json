@@ -485,7 +485,7 @@
         "evisa": true,
         "onArrival": false,
         "multipleEntry": false,
-        "notes": "Electronic visa (e-Visa) required. Apply online before travel. Processing typically takes 3-7 business days."
+        "notes": "Electronic visa (e-Visa) required. Apply online before travel. For Visitor visa (subclass 600), Tourist stream (apply outside Australia), consult the Home Affairs processing-time guide. It describes recently decided applications and is not specific to an individual application."
       },
       "documents": {
         "passport": {
@@ -514,7 +514,17 @@
         "lastChecked": "2026-01-19",
         "source": "passport-index-dataset"
       },
-      "lastUpdated": "2026-01-19T03:05:53.12"
+      "lastUpdated": "2026-10-22",
+      "source": {
+        "url": "https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/visitor-600/tourist-stream-overseas",
+        "governmentDomain": true,
+        "accessedDate": "2026-10-22",
+        "pageSection": "Overview > Processing times",
+        "verificationPath": "Home Affairs > Visas > Getting a visa > Visitor visa (subclass 600) > Tourist stream (apply outside Australia) > Overview > Processing times",
+        "exactQuote": "It is a guide only and not specific to your application.",
+        "confidence": "verified",
+        "notes": "Verification covers only the processing-time statement for Visitor visa (subclass 600), Tourist stream, applying outside Australia. No fixed processing duration is asserted. Passport-specific visa eligibility, other streams, documents and transit were not reverified."
+      }
     },
     {
       "to": {
