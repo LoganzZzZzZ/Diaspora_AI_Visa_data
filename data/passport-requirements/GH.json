@@ -6176,11 +6176,11 @@
         "policy": "voa",
         "type": null,
         "freeDays": null,
-        "maxStay": null,
+        "maxStay": 30,
         "evisa": false,
         "onArrival": true,
         "multipleEntry": false,
-        "notes": "Visa on arrival available for Ghanaian citizens at Maldives ports of entry. Bring sufficient funds, return ticket, and hotel booking."
+        "notes": "Tourist visa is granted on arrival in the Maldives. A visiting foreign national may stay up to 30 days from the date of entry without a fee; Immigration may extend this up to 90 days on payment of the prescribed fee. Entry is subject to immigration clearance and current entry requirements."
       },
       "documents": {
         "passport": {
@@ -6206,10 +6206,36 @@
       "meta": {
         "riskLevel": "low",
         "confidence": "verified",
-        "lastChecked": "2026-01-19",
-        "source": "passport-index-dataset"
+        "lastChecked": "2026-10-22",
+        "source": "Maldives Immigration"
       },
-      "lastUpdated": "2026-01-19T03:05:53.124"
+      "lastUpdated": "2026-10-22T00:00:00.000Z",
+      "source": {
+        "url": "https://www.immigration.gov.mv/visa/tourist-visa",
+        "governmentDomain": true,
+        "accessedDate": "2026-10-22",
+        "verificationPath": "Maldives Immigration > Visa > Tourist Visa - On Arrival",
+        "exactQuote": "Tourist visa is granted on arrival to the Maldives.",
+        "confidence": "verified",
+        "notes": "Scope: visa policy and initial stay only. The 30-day stay comes from Section 10(b) of the Maldives Immigration Act 2007 and matches the Ghana MFA visa-free list. Other fields are retained without re-verification.",
+        "additionalSources": [
+          {
+            "url": "https://www.immigration.gov.mv/downloads/act-regulations/Acts/The-Maldives_Immigration-Act-2007-English.pdf",
+            "governmentDomain": true,
+            "accessedDate": "2026-10-22",
+            "verificationPath": "Maldives Immigration > Downloads > Acts > Maldives Immigration Act 2007 (English) > Section 10(b)",
+            "exactQuote": "a foreign national visiting the Maldives may remain in the Maldives for a period not exceeding 30 days from the date of entry of that visit, without the payment of any fees."
+          },
+          {
+            "url": "https://passport.mfa.gov.gh/visa-free-countries",
+            "governmentDomain": true,
+            "accessedDate": "2026-10-22",
+            "verificationPath": "Ghana Passport Services (Ministry of Foreign Affairs) > Visa-Free Countries > Countries with visa-free or visa-waiver agreements with Ghana (Last updated: 8 September 2026 by MFA Ghana)",
+            "exactQuote": "30 days",
+            "notes": "Table row (page renders a table, not prose): Country 'Maldives', Ordinary Passport column marked eligible, Max Duration '30 days'."
+          }
+        ]
+      }
     },
     {
       "to": {
