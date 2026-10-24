@@ -2249,7 +2249,7 @@
         "evisa": false,
         "onArrival": false,
         "multipleEntry": true,
-        "notes": "Schengen visa required. Apply via German Embassy Accra or VFS Global. 90/180 rule applies."
+        "notes": "For Schengen short stays, apply by advance appointment at the German Embassy in Accra after registering on its waiting list. Short stays are limited to 90 days within a 180-day period."
       },
       "documents": {
         "passport": {
@@ -2278,7 +2278,17 @@
         "lastChecked": null,
         "source": null
       },
-      "lastUpdated": "2025-12-14T01:57:39.727631"
+      "lastUpdated": "2026-10-22",
+      "source": {
+        "url": "https://accra.diplo.de/gh-en/service/-visainformation/2589774-2589774",
+        "governmentDomain": true,
+        "accessedDate": "2026-10-22",
+        "pageSection": "General information; Receiving an Appointment; Application procedure",
+        "verificationPath": "German Embassy Accra > Visa > Short term stay - Schengen visa > Receiving an Appointment / Application procedure",
+        "exactQuote": "Please register yourself on the waiting list in order to get an appointment.",
+        "confidence": "verified",
+        "notes": "Verification covers the Schengen short-stay application channel, advance appointment/waiting-list procedure and 90 days in 180 days. It does not verify National D visas, document details or transit rules."
+      }
     },
     {
       "to": {
